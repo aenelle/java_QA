@@ -14,3 +14,8 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
 .idea/misc.xml
+sandbox/build/distributions/sandbox.tar
+sandbox/build/distributions/sandbox.zip
+sandbox/build/tmp/jar/MANIFEST.MF
+sandbox/build/scripts/sandbox.bat
+sandbox/build/scripts/sandbox

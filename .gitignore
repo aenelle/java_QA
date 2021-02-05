@@ -19,3 +19,5 @@ sandbox/build/distributions/sandbox.zip
 sandbox/build/tmp/jar/MANIFEST.MF
 sandbox/build/scripts/sandbox.bat
 sandbox/build/scripts/sandbox
+addressbook-web-tests/src/test/.DS_Store
+.DS_Store

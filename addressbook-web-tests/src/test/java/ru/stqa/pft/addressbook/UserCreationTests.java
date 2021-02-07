@@ -36,7 +36,7 @@ public class UserCreationTests {
     public void testUserCreation () throws Exception {
 
       gotoNewUsers();
-      fillUserForm(new UserData("Ivan", "Ivanov", "Software", "iva@gmail.com"));
+      fillUserForm(new UserData("Ivan", "Ivanov", "Software", "8(978)999-88-77", "iva@gmail.com"));
       submitUserCreating();
       returnToHomePages();
     }
@@ -59,6 +59,9 @@ public class UserCreationTests {
     wd.findElement(By.name("company")).click();
     wd.findElement(By.name("company")).clear();
     wd.findElement(By.name("company")).sendKeys(userData.getCompany());
+    wd.findElement(By.name("mobile")).click();
+    wd.findElement(By.name("mobile")).clear();
+    wd.findElement(By.name("mobile")).sendKeys(userData.getMobile());
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys(userData.getEmail());

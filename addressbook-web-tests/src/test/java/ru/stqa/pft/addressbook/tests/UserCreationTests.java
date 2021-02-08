@@ -13,7 +13,7 @@ import ru.stqa.pft.addressbook.model.UserData;
 import java.util.concurrent.TimeUnit;
 
 
-public class UserCreationTests {
+public class UserCreationTests extends TestBase{
   private WebDriver wd;
 
 

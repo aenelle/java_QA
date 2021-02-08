@@ -4,13 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     WebDriver wd;
     private SessionHelper sessionHelper;
-    private  NavigationHelper navigationHelper;
+    private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private UserHelper userHelper;
 
     public void init() {
         wd = new FirefoxDriver();
@@ -20,19 +22,11 @@ public class ApplicationManager {
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper.login("admin", "secret");
+        userHelper = new UserHelper(wd);
     }
 
     public void stop() {
         wd.quit();
-    }
-
-    public boolean isElementPresent(By by) {
-      try {
-        wd.findElement(by);
-        return true;
-      } catch (NoSuchElementException e) {
-        return false;
-      }
     }
 
     public GroupHelper getGroupHelper() {
@@ -42,4 +36,9 @@ public class ApplicationManager {
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
     }
+
+    public UserHelper getUserHelper() {
+        return userHelper;
+    }
+
 }

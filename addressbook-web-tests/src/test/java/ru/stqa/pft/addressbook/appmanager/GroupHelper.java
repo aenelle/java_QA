@@ -10,22 +10,20 @@ public class GroupHelper extends HelperBase {
         super(wd);
     }
 
-    public void returnToGroupPage() {
-        click(By.linkText("group page"));
+    public void initGroupCreating() {
+        click(By.name("new"));
     }
-
-    public void submitGroupCreating() {
-        click(By.name("submit"));
-    }
-
     public void fillGroupForm(GroupDate groupDate) {
         type(By.name("group_name"), groupDate.getName());
         type(By.name("group_header"), groupDate.getHeader());
         type(By.name("group_footer"), groupDate.getFooter());
     }
+    public void submitGroupCreating() {
+        click(By.name("submit"));
+    }
 
-    public void initGroupCreating() {
-        click(By.name("new"));
+    public void returnToGroupPage() {
+        click(By.linkText("group page"));
     }
 
     public void deleteSelectedGroups() {

@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.UserData;
 
 public class UserHelper extends HelperBase {
-    private WebDriver wd;
 
     public UserHelper(WebDriver wd) {
         super(wd);
@@ -27,4 +26,28 @@ public class UserHelper extends HelperBase {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
+    public void selectedUserProfile() {
+        click(By.xpath("(//input[@name='selected[]'])"));
+    }
+
+    public void initUserModification() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitUserModification() {
+        click(By.xpath("(//input[@name='update'])[2]"));
+    }
+
+    public void deleteUsers() {
+        click(By.xpath("(//input[@name='update'])[3]"));
+    }
+
+    public void returnHomePages() {
+        click(By.linkText("home page"));
+    }
+
+    public void deleteUsersFromHomePages() {
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+    }
 }

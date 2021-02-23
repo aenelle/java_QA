@@ -9,11 +9,11 @@ public class GroupModificationTests extends TestBase {
     @Test
     public void testCroupModification() {
         app.getNavigationHelper().gotoGroupPage();
+        int before = app.getContactHelper().getGroupCount();
         if (! app.getGroupHelper().isThereAGroup()){
             app.getGroupHelper().createGroup(new GroupDate("test1", "test2", "test3"));
         }
-        int before = app.getContactHelper().getGroupCount();
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(before - 1);
         app.getGroupHelper().initGroupModification();
         app.getGroupHelper().fillGroupForm(new GroupDate("test1", "test2", "testЕуые"));
         app.getGroupHelper().submitGroupModification();

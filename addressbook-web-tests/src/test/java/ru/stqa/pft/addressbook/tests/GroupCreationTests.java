@@ -22,7 +22,10 @@ public class GroupCreationTests extends TestBase {
 
     group.setId(after.stream().max(Comparator.comparingInt(GroupDate::getId)).get().getId());
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super GroupDate> byId = Comparator.comparingInt(GroupDate::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 
 }

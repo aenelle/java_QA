@@ -20,7 +20,6 @@ public class GroupCreationTests extends TestBase {
     Assert.assertEquals(after.size(), before.size() + 1);
 
 
-    group.setId(after.stream().max(Comparator.comparingInt(GroupDate::getId)).get().getId());
     before.add(group);
     Comparator<? super GroupDate> byId = Comparator.comparingInt(GroupDate::getId);
     before.sort(byId);

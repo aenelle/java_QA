@@ -27,15 +27,12 @@ public class GroupModificationTests extends TestBase {
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(before.size() - 1);
-        System.out.println(before);
-        System.out.println(after);
 
         before.add(group);
         Comparator<? super GroupDate> byId = Comparator.comparingInt(GroupDate::getId);
         before.sort(byId);
         after.sort(byId);
-        System.out.println(before);
-        System.out.println(after);
+
         Assert.assertEquals(before, after);
 
     }

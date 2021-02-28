@@ -31,7 +31,7 @@ public class ApplicationManager {
         else if (browser.equals(BrowserType.SAFARI)){
             wd = new SafariDriver();
         }
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);

@@ -36,7 +36,7 @@ public class ContactHelper extends HelperBase {
 
 
     public void submitContactCreating() {
-        click(By.xpath("(//input[@name='submit'])[2]"));
+        click(By.name("submit"));
     }
 
     public void selectedContactProfile() {
@@ -84,13 +84,23 @@ public class ContactHelper extends HelperBase {
     }
 
     public List<ContactData> getContactList() {
+        // создаем список для контактов
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+
+        // выбираем элемент разметки из которого будем извлекать lastname  and firstname
+        List<WebElement> elements =  wd.findElements(By.cssSelector("tr[name='entry']"));
+        
+        // создаем цикл где построчно берем lastname  and firstname
         for(WebElement element : elements){
-            String firstname = element.getText();
-            String lastname = element.getTagName();
+            int id = Integer.parseInt(element.findElement(By.cssSelector("td:nth-child(1) input")).getAttribute("value"));
+            String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+
+
+            //создаем экземпляр объекта ContactData
             ContactData contact =
-                    new ContactData(firstname, lastname, null, null, null, null);
+                    new ContactData(id, firstname, lastname, null, null, null, null);
+            //добавляем прочитанные данные
             contacts.add(contact);
         }
 

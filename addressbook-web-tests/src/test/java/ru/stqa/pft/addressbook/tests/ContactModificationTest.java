@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase {
@@ -18,12 +20,27 @@ public class ContactModificationTest extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
         //app.getContactHelper().selectedContactProfile();
         app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(new ContactData
-                ("Inna", "Ivanova", "Software", "8(978)111-11-77", "oova@gmail.com", null), false);
+        // создаем локальную переменную, чтобы ее везде использовать
+        ContactData contact = new ContactData
+                (before.get(before.size() - 1).getId(),before.get(before.size() - 1).getFirstName(), before.get(before.size() - 1).getLastName(), "Software", "8(978)111-11-77", "oova@gmail.com", null);
+        app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
         app.getContactHelper().returnHomePages();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
+
+
+        before.remove(before.size() -1);
+        System.out.println(new HashSet<Object>(before));
+        System.out.println(new HashSet<Object>(after));
+
+        before.add(contact);
+
+        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+        before.sort(byId);
+        System.out.println(new HashSet<Object>(before));
+        System.out.println(new HashSet<Object>(after));
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
 
     }

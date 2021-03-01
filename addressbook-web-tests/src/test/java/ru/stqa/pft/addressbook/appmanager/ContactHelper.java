@@ -64,6 +64,7 @@ public class ContactHelper extends HelperBase {
     public void deleteContactFromHomePages() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+        wd.findElement(By.cssSelector("div.msgbox")); // вот так можно искать это сообщение о том, что контакт удалён
     }
 
     public boolean isThereAContact() {

@@ -20,9 +20,8 @@ public class ContactCreationTests extends TestBase {
     app.getContactHelper().initContactCreating();
     // создаем переменную
     ContactData contact = new ContactData
-            ("DUDU", "OLLO", null, "8(978)999-88-77", "iva@gmail.com", "test1");
+            ("Vlada", "Orlova", null, "8(978)999-88-77", "iva@gmail.com", "test1");
     app.getContactHelper().createContact(contact); //передаем в нее значения созданной переменной
-    app.getNavigationHelper().gotoHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 

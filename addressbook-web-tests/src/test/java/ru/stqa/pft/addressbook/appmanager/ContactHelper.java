@@ -71,7 +71,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.xpath("(//input[@name='selected[]'])"));
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         initContactCreating();
         fillContactForm(contact, true);
         submitContactCreating();
@@ -83,12 +83,18 @@ public class ContactHelper extends HelperBase {
         submitContactModification();
         returnHomePages();
     }
+    public void delete(int index) {
+        selectedContact(index);
+        deleteContactFromHomePages();
+        returnHomePages();
+    }
+
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         // создаем список для контактов
         List<ContactData> contacts = new ArrayList<ContactData>();
 

@@ -4,15 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
-
 import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition(){
-        app.getNavigationHelper().gotoHomePage();
-        if (! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().createContact(new ContactData
+        app.goTo().gotoHomePage();
+        if (app.contact().list().size() == 0){
+            app.contact().create(new ContactData
                     ("Vlada", "Petrova", "LTD", "8(888)000-00-00", "petrova@gmail.com", "test1"));
         }
     }
@@ -20,13 +19,13 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletionFromProfile(){
 
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         int index = before.size() -1;
-        app.getContactHelper().initContactModification(index);
-        app.getContactHelper().deleteContact();
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), index);
+        app.contact().initContactModification(index);
+        app.contact().deleteContact();
+        app.goTo().gotoHomePage();
+        List<ContactData> after = app.contact().list();
+        Assert.assertEquals(after.size(), before.size() -1);
 
         before.remove(index);
         Assert.assertEquals(before, after);
@@ -38,17 +37,16 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletionFromHomePage(){
 
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         int index = before.size() -1;
-        app.getContactHelper().selectedContact(index);
-        app.getContactHelper().deleteContactFromHomePages();
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), index);
+        app.contact().delete(index);
+        List<ContactData> after = app.contact().list();
+        Assert.assertEquals(after.size(),before.size() -1);
 
         before.remove(index);
         Assert.assertEquals(before, after);
 
 
     }
+
 }

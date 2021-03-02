@@ -8,45 +8,43 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
-    public void ensurePrecondition(){
+    public void ensurePrecondition() {
         app.goTo().gotoHomePage();
-        if (app.contact().list().size() == 0){
+        if (app.contact().list().size() == 0) {
             app.contact().create(new ContactData
                     ("Vlada", "Petrova", "LTD", "8(888)000-00-00", "petrova@gmail.com", "test1"));
         }
     }
 
     @Test
-    public void testContactDeletionFromProfile(){
+    public void testContactDeletionFromHomePage() {
 
         List<ContactData> before = app.contact().list();
-        int index = before.size() -1;
-        app.contact().initContactModification(index);
-        app.contact().deleteContact();
-        app.goTo().gotoHomePage();
+        int index = before.size() - 1;
+        app.contact().delete(index);
         List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), before.size() -1);
+        Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(index);
         Assert.assertEquals(before, after);
-
 
     }
 
 
     @Test
-    public void testContactDeletionFromHomePage(){
+    public void testContactDeletionFromProfile() {
 
         List<ContactData> before = app.contact().list();
-        int index = before.size() -1;
-        app.contact().delete(index);
+        int index = before.size() - 1;
+        app.contact().initContactModification(index);
+        app.contact().deleteContact();
+        app.goTo().gotoHomePage();
         List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(),before.size() -1);
+        Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(index);
         Assert.assertEquals(before, after);
 
 
     }
-
 }

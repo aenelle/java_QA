@@ -23,11 +23,8 @@ public class ContactModificationTest extends TestBase {
 
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        // контролируем выбор контакта для модификации
         app.contact().initContactModification(index);
-
-        // создаем локальную переменную, чтобы ее везде использовать
-        ContactData contact = new ContactData
+        ContactData contact = new ContactData  // создаем локальную переменную, чтобы ее везде использовать
                 (before.get(index).getId(),"Vlada", "Levchenko", "Software", "8(978)111-11-77", "oova@gmail.com", null);
         app.contact().modifyContact(contact);
         List<ContactData> after = app.contact().list();
@@ -35,9 +32,7 @@ public class ContactModificationTest extends TestBase {
 
 
         before.remove(index);
-
         before.add(contact);
-
         Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
         after.sort(byId);

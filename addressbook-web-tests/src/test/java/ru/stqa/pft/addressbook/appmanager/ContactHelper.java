@@ -58,6 +58,9 @@ public class ContactHelper extends HelperBase {
     }
 
     public void returnHomePages() {
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
         click(By.linkText("home page"));
     }
 
@@ -82,6 +85,7 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact, false);
         submitContactModification();
         returnHomePages();
+
     }
     public void delete(int index) {
         selectedContact(index);

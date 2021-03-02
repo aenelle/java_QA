@@ -16,10 +16,9 @@ public class ContactCreationTests extends TestBase {
 
     List<ContactData> before = app.contact().list();
     app.contact().initContactCreating();
-    // создаем переменную
     ContactData contact = new ContactData
             ("Vlada", "Orlova", null, "8(978)999-88-77", "iva@gmail.com", "test1");
-    app.contact().create(contact); //передаем в нее значения созданной переменной
+    app.contact().create(contact);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 

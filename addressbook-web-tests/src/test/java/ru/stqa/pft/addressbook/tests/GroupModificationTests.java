@@ -13,7 +13,7 @@ public class GroupModificationTests extends TestBase {
     public void ensurePrecondition(){
         app.goTo().groupPage();
         if (app.group().list().size() == 0){
-            app.group().create(new GroupDate("test1", "test2", "test3"));
+            app.group().create(new GroupDate().withName("test1"));
         }
 
     }
@@ -22,7 +22,7 @@ public class GroupModificationTests extends TestBase {
     public void testCroupModification() {
         List<GroupDate> before = app.group().list();
         int index = before.size() - 1;
-        GroupDate group = new GroupDate(before.get(index).getId(), "test1", "test2", "testPRO");
+        GroupDate group = new GroupDate().withId(before.get(index).getId()).withName("test1").withHeader("test2").withFooter("testPRO");
         app.group().modify(index, group);
         List<GroupDate> after = app.group().list();
         Assert.assertEquals(after.size(), before.size());

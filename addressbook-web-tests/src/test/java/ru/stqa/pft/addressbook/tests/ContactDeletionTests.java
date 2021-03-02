@@ -11,7 +11,7 @@ public class ContactDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         app.goTo().gotoHomePage();
-        if (app.contact().list().size() == 0) {
+        if (app.contact().all().size() == 0) {
             app.contact().create(new ContactData().withFirstName("Vlada").withLastName("Petrova").withCompany("LTD").withMobile("8(888)000-00-00").withEmail("petrova@gmail.com").withGroup("test1"));
         }
     }
@@ -30,22 +30,24 @@ public class ContactDeletionTests extends TestBase {
 
     }
 
-
-    @Test
+// todo альтернативный тест "удаление контакта из профиля" вернуться позже
+    /*@Test
     public void testContactDeletionFromProfile() {
 
         Set<ContactData> before = app.contact().all();
-        ContactData deletedContact = before.iterator().next();
-        int index = before.size() - 1;
-        app.contact().initContactModification(index);
+        ContactData modifiedContact = before.iterator().next();
+
+        app.contact().initContactModificationById(modifiedContact.id);
         app.contact().deleteContact();
         app.goTo().gotoHomePage();
         Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(deletedContact);
+        before.remove(modifiedContact.id);
         Assert.assertEquals(before, after);
 
 
     }
+    */
+
 }

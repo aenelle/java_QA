@@ -11,7 +11,7 @@ public class ContactCreationTests extends TestBase {
 
 
   @Test
-  public void testContactCreation() throws Exception {
+  public void testContactCreation() {
 
     Set<ContactData> before = app.contact().all();
     app.contact().initContactCreating();

@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -58,9 +58,6 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//input[@name='update'])[2]"));
     }
 
-    public void deleteContact() {
-        click(By.xpath("(//input[@name='update'])[3]"));
-    }
 
     public void returnHomePages() {
         if (isElementPresent(By.id("maintable"))) {
@@ -86,19 +83,20 @@ public class ContactHelper extends HelperBase {
         returnHomePages();
 
     }
-    public void modifyContact(ContactData contact) {
+    public void modify(ContactData contact) {
+        initContactModificationById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
         returnHomePages();
 
     }
-    public void delete(int index) {
-        selectedContact(index);
-        deleteContactFromHomePages();
-        returnHomePages();
+
+    public void initContactModificationById(int id) {
+        wd.findElement(By.xpath("//a[@href='edit.php?id=" + id +"']")).click();
     }
-    public void delete(ContactData cotnact) {
-        selectedContactById(cotnact.getId());
+
+    public void delete(ContactData contact) {
+        selectedContactById(contact.getId());
         deleteContactFromHomePages();
         returnHomePages();
     }
@@ -108,23 +106,6 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        // создаем список для контактов
-        List<ContactData> contacts = new ArrayList<ContactData>();
-
-        // выбираем элемент разметки из которого будем извлекать lastname  and firstname
-        List<WebElement> elements =  wd.findElements(By.cssSelector("tr[name='entry']"));
-        
-        // создаем цикл где построчно берем lastname  and firstname
-        for(WebElement element : elements){
-            int id = Integer.parseInt(element.findElement(By.cssSelector("td:nth-child(1) input")).getAttribute("value"));
-            String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-            contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname));
-        }
-
-        return contacts;
-    }
     public Set<ContactData> all() {
         Set<ContactData> contacts = new HashSet<ContactData>();
         List<WebElement> elements =  wd.findElements(By.cssSelector("tr[name='entry']"));

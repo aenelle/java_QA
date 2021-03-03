@@ -28,9 +28,8 @@ public class ContactModificationTest extends TestBase {
               new ContactData().withId(modifiedContact.getId()).withFirstName("Vlada").withLastName("Levchenko").withCompany("Software").withMobile("8(978)111-11-77").withEmail("oova@gmail.com");  // создаем локальную переменную, чтобы ее везде использовать
 
       app.contact().modify(contact);
+      assertEquals(app.contact().count(), before.size());
       Contacts after = app.contact().all();
-      assertEquals(after.size(), before.size());
-
       assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
 
     }

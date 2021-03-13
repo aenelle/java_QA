@@ -15,7 +15,7 @@ public class ContactModificationTest extends TestBase {
         app.goTo().gotoHomePage();
         if (app.contact().all().size() == 0){
             app.contact().create
-                    (new ContactData().withFirstName("Vlada").withLastName("Petrova").withCompany("LTD").withMobile("8(888)000-00-00").withEmail("petrova@gmail.com").withGroup("test1"));
+                    (new ContactData().withFirstName("Vlada").withLastName("Petrova").withCompany("LTD").withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com").withGroup("test1"));
         }
     }
 
@@ -25,7 +25,7 @@ public class ContactModificationTest extends TestBase {
       Contacts before = app.contact().all();
       ContactData modifiedContact = before.iterator().next();
       ContactData contact =
-              new ContactData().withId(modifiedContact.getId()).withFirstName("Vlada").withLastName("Levchenko").withCompany("Software").withMobile("8(978)111-11-77").withEmail("oova@gmail.com");  // создаем локальную переменную, чтобы ее везде использовать
+              new ContactData().withId(modifiedContact.getId()).withFirstName("Vlada").withLastName("Levchenko").withCompany("Software").withMobilePhone("8(978)111-11-77").withEmail("oova@gmail.com");  // создаем локальную переменную, чтобы ее везде использовать
 
       app.contact().modify(contact);
       assertEquals(app.contact().count(), before.size());

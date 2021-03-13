@@ -2,11 +2,16 @@ package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
     public   int id = Integer.MAX_VALUE;
-    private  String firstName;
-    private  String lastName;
-    private  String company;
-    private  String mobile;
-    private  String email;
+    private String firstName;
+    private String lastName;
+    private String company;
+    private String address;
+    private String home;
+    private String mobile;
+    private String work;
+    private String email;
+    private String email2;
+    private String email3;
     private String group;
 
 //    public ContactData(int id, String firstName, String lastName, String company, String mobile, String email, String group) {
@@ -43,14 +48,35 @@ public class ContactData {
         this.company = company;
         return this;
     }
+    public ContactData withAddress(String address) {
+        this.company = address;
+        return this;
+    }
 
-    public ContactData withMobile(String mobile) {
+    public ContactData withHomePhone(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobile) {
         this.mobile = mobile;
+        return this;
+    }
+    public ContactData withWorkPhone(String work) {
+        this.work = work;
         return this;
     }
 
     public ContactData withEmail(String email) {
         this.email = email;
+        return this;
+    }
+    public ContactData withEmail2(String email2) {
+        this.email = email2;
+        return this;
+    }
+    public ContactData withEmail3(String email3) {
+        this.email = email3;
         return this;
     }
 
@@ -78,10 +104,26 @@ public class ContactData {
         return company;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getHome(){return home;}
+
     public String getMobile() {return mobile;}
+
+    public String getWork(){return  work;}
 
     public String getEmail() {
         return email;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
     }
 
     public String getGroup() {

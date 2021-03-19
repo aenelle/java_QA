@@ -27,12 +27,14 @@ public class ContactHelper extends HelperBase {
         type(By.name("company"), contactData.getCompany());
         type(By.name("mobile"), contactData.getMobilePhone());
         type(By.name("email"), contactData.getEmail());
+        attach(By.name("photo"), contactData.getPhoto()); // обязательно передать в качестве параметра полный путь .getAbsolutePath()
         if(creation){
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         }else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
+            }
         }
-    }
+
 
 
     public void submitContactCreating() {

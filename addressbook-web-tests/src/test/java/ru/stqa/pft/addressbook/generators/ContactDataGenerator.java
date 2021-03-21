@@ -77,7 +77,7 @@ public class ContactDataGenerator {
   private static List<ContactData> generateContacts(int count){
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
-      contacts.add(new ContactData().withFirstName(String.format("firstName %s", i)).withLastName(String.format("lastName %s", i)).withCompany(String.format("Company %s", i)));
+      contacts.add(new ContactData().withFirstName(String.format("Vitali %s", i)).withLastName(String.format("Morozov %s", i)).withCompany(String.format("ISS %s", i)));
     }
     return contacts;
   }

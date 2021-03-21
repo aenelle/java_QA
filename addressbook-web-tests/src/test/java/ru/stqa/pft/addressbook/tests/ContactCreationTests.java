@@ -48,9 +48,10 @@ public class ContactCreationTests extends TestBase {
   }
 
   @Test
+  // код по лекции
   public void testContactCreation1() {
 
-    Contacts before = app.contact().all();
+    app.goTo().gotoHomePage();
     app.contact().initContactCreating();
     File photo = new File("src/test/resources/cat.jpg");
     app.contact().fillContactForm(new ContactData().withFirstName("Ollo").withLastName("Ups").withCompany("LTD")

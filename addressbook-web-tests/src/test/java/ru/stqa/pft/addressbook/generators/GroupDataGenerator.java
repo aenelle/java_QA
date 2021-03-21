@@ -56,30 +56,29 @@ public String format;
   private void saveAsJson(List<GroupDate> groups, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(groups);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try(Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
   private void saveAsXml(List<GroupDate> groups, File file) throws IOException {
     XStream xstream = new XStream();
     xstream.processAnnotations(GroupDate.class);
     String xml = xstream.toXML(groups); // в качестве параметра передаем тот объект, который нужно серилизовать, превратить из объектного представления в строчку формата xml
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try(Writer writer = new FileWriter(file)){
+      writer.write(xml);
+    }
   }
 
 
   private  void saveAsCsv(List<GroupDate> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());// проверяем, относительный путь файла и оказывается директория проекта, потому что по разному тесты и программы
     // нужно список сохранить в файл
-    Writer writer = new FileWriter(file); //нужно файл открыть на запись
-    for (GroupDate group : groups) {
-      writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(),group.getFooter() ));
+    try(Writer writer = new FileWriter(file)) { //нужно файл открыть на запись
+      for (GroupDate group : groups) {
+        writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
+      }
     }
-    writer.close(); // необходимо закрыть для явного сохранения данных
-
   }
 
   private static List<GroupDate> generateGroups(int count) {

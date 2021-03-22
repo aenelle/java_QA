@@ -87,6 +87,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/addressbook-web-tests/src/test/resources/hibernate.cfg.xml">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/addressbook-web-tests/src/test/resources/logback.xml">
           <value>
             <Attribute>

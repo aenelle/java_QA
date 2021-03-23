@@ -37,6 +37,8 @@ public class ContactCreationTests extends TestBase {
     return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
+
+
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation2(ContactData contact) {
 
@@ -68,7 +70,7 @@ public class ContactCreationTests extends TestBase {
     File photo = new File("src/test/resources/cat.jpg");
 
     ContactData contact = (new ContactData().withFirstName("Avrora").withLastName("Petrova").withCompany("LTD").withAddress("Kalinina 18")
-            .withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com").withPhoto(photo).withGroup("test1"));
+            .withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com").withPhoto(photo));
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
@@ -81,7 +83,7 @@ public class ContactCreationTests extends TestBase {
     Contacts before = app.db().contacts();
     app.contact().initContactCreating();
     ContactData contact = (new ContactData().withFirstName("Vla'").withLastName("Petrova").withCompany("LTD")
-            .withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com").withGroup("test1"));
+            .withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com"));
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();

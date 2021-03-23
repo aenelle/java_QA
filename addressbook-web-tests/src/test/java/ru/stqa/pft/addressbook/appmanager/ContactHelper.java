@@ -34,8 +34,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), contactData.getEmail3());
         attach(By.name("photo"), contactData.getPhoto()); // обязательно передать в качестве параметра полный путь .getAbsolutePath()
         if(creation) {
-            if (contactData.getGroup() != null) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup()); // todo лекция 6.1 пересмотреть код
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName()); // todo лекция 6.1 пересмотреть код
             }
         }else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -71,7 +72,7 @@ public class ContactHelper extends HelperBase {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     public void deleteContactFromHomePages() {
@@ -168,7 +169,28 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withAddress(address).
                 withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail(email).withEmail2(email2).withEmail3(email3);
     }
+    public void selectGroup(Contacts contactData){
+        if (contactData.iterator().next().getGroups().size() > 1){
+            Assert.assertTrue(contactData.iterator().next().getGroups().size() == 1);
+            new Select(wd.findElement(By.name("group"))).selectByVisibleText(contactData.iterator().next().getGroups().iterator().next().getName());
 
+        }
+    }
 
-
+    public void addContactToGroup(){
+        click(By.name("add"));
+        contactCache = null;
+        returnHomePages();
+    }
+    public void selectGroupPage(Contacts contactData){
+        if (contactData.iterator().next().getGroups().size() > 0){
+            Assert.assertTrue((contactData.iterator().next().getGroups().size() == 1));
+            new Select(wd.findElement(By.name("group"))).selectByVisibleText(contactData.iterator().next().getGroups().iterator().next().getName());
+        }
+    }
+    public void removeContactFromGroup(){
+        click(By.name("remove"));
+        contactCache = null;
+        returnHomePages();
+    }
 }

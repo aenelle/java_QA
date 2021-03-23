@@ -31,7 +31,7 @@ public class DbHelper {
     session.close();
     return new Groups(result);
   }
-  public Contacts Contacts() {
+  public Contacts contacts() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
     List<ContactData> result = session.createQuery("from ContactData").list();

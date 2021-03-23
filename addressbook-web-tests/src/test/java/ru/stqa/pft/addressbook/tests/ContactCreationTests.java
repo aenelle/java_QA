@@ -41,11 +41,11 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation2(ContactData contact) {
 
     app.goTo().gotoHomePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create(contact);
     app.goTo().gotoHomePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g)-> g.getId()).max().getAsInt()))));
   }
 
@@ -63,7 +63,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test  //(enabled = false)
   public void testContactCreation() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().initContactCreating();
     File photo = new File("src/test/resources/cat.jpg");
 
@@ -71,20 +71,20 @@ public class ContactCreationTests extends TestBase {
             .withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com").withPhoto(photo).withGroup("test1"));
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
   @Test //(enabled = false)
   public void testBadContactCreation() {
 
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().initContactCreating();
     ContactData contact = (new ContactData().withFirstName("Vla'").withLastName("Petrova").withCompany("LTD")
             .withMobilePhone("8(888)000-00-00").withEmail("petrova@gmail.com").withGroup("test1"));
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before));
   }
 }

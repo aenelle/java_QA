@@ -164,6 +164,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/ApplicationManager.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/HttpSession.java">
           <value>
             <Attribute>
@@ -172,6 +179,13 @@
           </value>
         </entry>
         <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/tests/LoginTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/tests/RegistrationTest.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

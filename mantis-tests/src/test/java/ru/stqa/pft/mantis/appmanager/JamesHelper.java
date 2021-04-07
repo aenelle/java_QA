@@ -80,7 +80,7 @@ public class JamesHelper {
       StringBuffer sb = new StringBuffer();
       char ch = (char) in.read();
       while (true){
-        System.out.println(ch);
+        System.out.print(ch);
         sb.append(ch);
         if (ch ==lastChar){
           if (sb.toString().endsWith(pattern)){

@@ -171,6 +171,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/DataHelper.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/HttpSession.java">
           <value>
             <Attribute>
@@ -179,6 +186,27 @@
           </value>
         </entry>
         <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/JamesHelper.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/MailHelper.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/model/User.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/tests/ChangePasswordTests.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

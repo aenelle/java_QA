@@ -17,12 +17,12 @@ public class TestBase {
     @BeforeSuite
     public void setUp() throws Exception {
         app.init();
-        app.ftp().upload(new File("src/test/resources/config_inc.php"), "mantisbt-2.25.0/config/config_inc.php", "mantisbt-2.25.0/config/config_inc.php.back");
+        app.ftp().upload(new File("src/test/resources/config_inc.php"), "mantisbt-1.2.20/config/config_inc.php", "mantisbt-1.2.20/config/config_inc.php.back");
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws IOException {
-        app.ftp().restore("mantisbt-2.25.0/config/config_inc.php.back", "mantisbt-2.25.0/config/config_inc.php");
+        app.ftp().restore("mantisbt-1.2.20/config/config_inc.php.back", "mantisbt-1.2.20/config/config_inc.php");
         app.stop();
     }
 

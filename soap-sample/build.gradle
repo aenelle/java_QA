@@ -1,0 +1,34 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+}
+
+buildscript{
+    repositories{
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'javax.xml.bind:jaxb-api:2.3.1'
+        classpath 'javax.xml.ws:jaxws-api:2.3.1'
+        classpath 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
+        classpath 'org.glassfish.main.javaee-api:javax.jws:3.1.2.2'
+        classpath 'com.sun.xml.messaging.saaj:saaj-impl:1.5.1'
+        classpath 'no.nils:wsdl2java:0.9'
+    }
+}
+
+apply plugin: 'no.nils.wsdl2java'
+
+wsdl2java {
+    generatedWsdlDir = file("src/main/java")
+    wsdlDir = file("src/main/resources")
+    wsdlsToGenerate = [
+                          ['src/main/resources/geoipservice.wsdl'],
+    ]
+}

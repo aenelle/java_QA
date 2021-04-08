@@ -241,6 +241,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/soap-sample/src/test/java/ru/stqa/pft/soap/GeoIpServiceTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

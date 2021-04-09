@@ -276,6 +276,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/rest-sample/src/test/java/ru/stqa/pft/rest/RestAssuredTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/rest-sample/src/test/java/ru/stqa/pft/rest/RestTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/soap-sample/src/test/java/ru/stqa/pft/soap/GeoIpServiceTests.java">
           <value>
             <Attribute>

@@ -73,6 +73,16 @@ public class Issue {
             ", description='" + description + '\'' +
             '}';
   }
+  private String state;
+
+  public String getState() {
+    return state;
+  }
+
+  public Issue withState(String state) {
+    this.state = state;
+    return this;
+  }
 
 }
 

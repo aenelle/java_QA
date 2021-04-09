@@ -157,6 +157,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/github-sample/src/test/java/ru/stqa/pft/github/GithubTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/mantis-tests/build.gradle">
           <value>
             <Attribute>

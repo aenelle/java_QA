@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupDate;
 
 import java.util.List;
 
@@ -33,16 +34,15 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         attach(By.name("photo"), contactData.getPhoto()); // обязательно передать в качестве параметра полный путь .getAbsolutePath()
-        if(creation) {
+        if (creation) {
             if (contactData.getGroups().size() > 0) {
                 Assert.assertTrue(contactData.getGroups().size() == 1);
                 new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName()); // todo лекция 6.1 пересмотреть код
             }
-        }else {
+        } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
-            }
         }
-
+    }
 
 
     public void submitContactCreating() {
@@ -52,9 +52,11 @@ public class ContactHelper extends HelperBase {
     public void selectedContactProfile() {
         click(By.xpath("(//input[@name='selected[]'])"));
     }
+
     public void selectedContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
+
     public void selectedContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
@@ -93,6 +95,7 @@ public class ContactHelper extends HelperBase {
         returnHomePages();
 
     }
+
     public void modify(ContactData contact) {
         initContactModificationById(contact.getId());
         fillContactForm(contact, false);
@@ -108,10 +111,10 @@ public class ContactHelper extends HelperBase {
         WebElement row = checkbox.findElement(By.xpath("./../..")); // нашли нужную строку
         List<WebElement> cells = row.findElements(By.tagName("td"));// берем полный список ячеек
         cells.get(7).findElement(By.tagName("a")).click();
-       // wd.findElement(By.xpath("//a[@href='edit.php?id=" + id +"']")).click();
+        // wd.findElement(By.xpath("//a[@href='edit.php?id=" + id +"']")).click();
 
-       // Лекция 5.9 время 8.10 -8.45
-       // wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+        // Лекция 5.9 время 8.10 -8.45
+        // wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
 
     }
 
@@ -130,13 +133,13 @@ public class ContactHelper extends HelperBase {
     private Contacts contactCache = null;
 
     public Contacts all() {
-       if(contactCache != null){
-           return new Contacts(contactCache);
-      }
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
         contactCache = new Contacts();
         //Set<ContactData> contacts = new HashSet<ContactData>();
-        List<WebElement> elements =  wd.findElements(By.cssSelector("tr[name='entry']"));
-        for(WebElement element : elements){
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String firstname = cells.get(2).getText();
@@ -153,7 +156,8 @@ public class ContactHelper extends HelperBase {
         }
         return new Contacts(contactCache);
     }
-    public ContactData infoFromEditForm (ContactData contact){
+
+    public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
@@ -169,28 +173,60 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withAddress(address).
                 withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail(email).withEmail2(email2).withEmail3(email3);
     }
-    public void selectGroup(Contacts contactData){
-        if (contactData.iterator().next().getGroups().size() > 1){
+
+    public void selectGroup(Contacts contactData) {
+        if (contactData.iterator().next().getGroups().size() > 1) {
             Assert.assertTrue(contactData.iterator().next().getGroups().size() == 1);
             new Select(wd.findElement(By.name("group"))).selectByVisibleText(contactData.iterator().next().getGroups().iterator().next().getName());
 
         }
     }
 
-    public void addContactToGroup(){
+    public void addContactToGroup() {
         click(By.name("add"));
         contactCache = null;
         returnHomePages();
     }
-    public void selectGroupPage(Contacts contactData){
-        if (contactData.iterator().next().getGroups().size() > 0){
+
+    public void selectGroupPage(Contacts contactData) {
+        if (contactData.iterator().next().getGroups().size() > 0) {
             Assert.assertTrue((contactData.iterator().next().getGroups().size() == 1));
             new Select(wd.findElement(By.name("group"))).selectByVisibleText(contactData.iterator().next().getGroups().iterator().next().getName());
         }
     }
-    public void removeContactFromGroup(){
+
+    public void removeContactFromGroup() {
         click(By.name("remove"));
         contactCache = null;
         returnHomePages();
     }
+
+    public void selectGroup(GroupDate group) {
+        wd.findElement(By.xpath(String.format("//select[@name='to_group']/option[@value='%s']", group.getId()))).click();
+    }
+
+    public void selectContactNotGroup(ContactData contact) {
+        click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+    }
+
+    public void getGroupData(GroupDate groupData) {
+        click(By.xpath(String.format("//select[@name='group']/option[text() = '%s']", groupData.getName())));
+        ;
+    }
+
+    public void selectContactNotInGroup(ContactData contact) {
+        wd.findElement(By.xpath(String.format("//input[@type='checkbox']", contact.getId()))).click();
+    }
+
+
+    public void selectContact(ContactData contact) {
+        click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+    }
+
+    public void selectContactWithoutGroup(ContactData contact) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText("[none]");
+        click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+    }
 }
+
+

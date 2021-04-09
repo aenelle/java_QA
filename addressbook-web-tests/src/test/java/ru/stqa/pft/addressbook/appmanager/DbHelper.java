@@ -10,6 +10,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupDate;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class DbHelper {
@@ -39,6 +40,50 @@ public class DbHelper {
     session.close();
     return new Contacts(result);
   }
+  public ContactData contactNotInGroup() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where groups.size = 0 and deprecated = '0000-00-00'").list();
+    session.getTransaction().commit();
+    session.close();
+    return result.iterator().next();
+  }
+
+  public ContactData contactById(int id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery(String.format("from ContactData where id = %s ", id)).list();
+    session.getTransaction().commit();
+    session.close();
+    return result.iterator().next();
+  }
+  public ContactData contactInGroup() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery(String.format("from ContactData where groups.size > 0 and deprecated = '0000-00-00'")).list();
+    session.getTransaction().commit();
+    session.close();
+    return result.iterator().next();
+  }
+
+  public ContactData contactWithoutGroup() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where groups.size = 0 and deprecated = '0000-00-00'").list();
+    session.getTransaction().commit();
+    session.close();
+    return result.iterator().next();
+  }
+
+  public Contacts contactWithoutGroups (){
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery( "from ContactData where groups.size = 0 and deprecated = '0000-00-00'" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result);
+  }
+
 }
 
 

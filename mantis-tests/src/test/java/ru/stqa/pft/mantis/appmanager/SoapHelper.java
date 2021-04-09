@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.math.BigInteger.*;
 import static java.math.BigInteger.valueOf;
 
 public class SoapHelper {
@@ -32,13 +33,13 @@ public class SoapHelper {
 
   private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
     MantisConnectPortType mc = new MantisConnectLocator()
-            .getMantisConnectPort(new URL("http://localhost/mantisbt-1.2.20/api/soap/mantisconnect.php"));
+            .getMantisConnectPort(new URL("http://localhost/mantisbt-2.25.0/api/soap/mantisconnect.php"));
     return mc;
   }
 
   public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
     MantisConnectPortType mc = getMantisConnect();
-    String[] categories = mc.mc_project_get_categories("administrator", "root", BigInteger.valueOf(issue.getProject().getId()));
+    String[] categories = mc.mc_project_get_categories("administrator", "root", valueOf(issue.getProject().getId()));
     IssueData issueData = new IssueData();
     issueData.setSummary(issue.getSummary());
     issueData.setDescription(issue.getDescription());
@@ -51,5 +52,13 @@ public class SoapHelper {
             .withDescription(createdIssueData.getDescription())
             .withProject(new Project().withId(createdIssueData.getProject().getId().intValue()).withName(createdIssueData.getProject().getName()));
   }
-  
+  public Issue getIssueById(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+    MantisConnectPortType mantisConnectPort = getMantisConnect();
+    IssueData issue = mantisConnectPort.mc_issue_get("administrator", "root", valueOf(issueId));
+    return new Issue().withId(issue.getId().intValue()).withSummary(issue.getSummary()).
+            withDescription(issue.getDescription()).withStatus(issue.getStatus().getName()).
+            withResolution(issue.getResolution().getName()).withProject(new Project().
+            withId(issue.getProject().getId().intValue()).
+            withName(issue.getProject().getName()));
+  }
 }

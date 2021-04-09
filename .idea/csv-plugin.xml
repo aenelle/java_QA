@@ -199,6 +199,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/RegistrationHelper.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/SessionHelper.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/appmanager/SoapHelper.java">
           <value>
             <Attribute>
@@ -242,6 +256,13 @@
           </value>
         </entry>
         <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/tests/SoapTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/mantis-tests/src/test/java/ru/stqa/pft/mantis/tests/TestBase.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

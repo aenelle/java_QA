@@ -17,22 +17,28 @@ public class GroupDate {
     @Id
     @Column(name = "group_id")
     private  int id = Integer.MAX_VALUE;
+
     @Expose
     @Column(name = "group_name")
     private  String name;
+
     @Expose
     @Column(name = "group_header")
     @Type(type = "text")
     private  String header;
+
     @Expose
     @Column(name = "group_footer")
     @Type(type = "text")
     private  String footer;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<ContactData> contacts = new HashSet<ContactData>();
 
-    public Set<ContactData> getContacts() {
+//    public Set<ContactData> getContacts() {
+//        return new Contacts(contacts);
+//    }
+    public Contacts getContacts() {
         return new Contacts(contacts);
     }
 

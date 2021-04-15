@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/GroupHelper.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/generators/ContactDataGenerator.java">
           <value>
             <Attribute>
@@ -59,7 +66,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/ContactAddGroupTest.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/ContactCreationTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/ContactDelGroup.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />
@@ -101,6 +122,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/DeleteContactFromGroup.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupCreationTests.java">
           <value>
             <Attribute>
@@ -123,6 +151,13 @@
           </value>
         </entry>
         <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/HbConnectionTest.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/SampleTest.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

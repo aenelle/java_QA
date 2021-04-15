@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupDate;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -205,6 +206,7 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.xpath(String.format("//select[@name='to_group']/option[@value='%s']", group.getId()))).click();
     }
 
+
     public void selectContactNotGroup(ContactData contact) {
         click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
     }
@@ -226,6 +228,58 @@ public class ContactHelper extends HelperBase {
     public void selectContactWithoutGroup(ContactData contact) {
         new Select(wd.findElement(By.name("group"))).selectByVisibleText("[none]");
         click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+    }
+    public void addGroupToContact(ContactData contact, GroupDate group) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+        selectedContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group")))
+                .selectByVisibleText(group.getName());
+        click(By.name("add"));
+    }
+    public void deleteGroupFromContact(ContactData contact, GroupDate group){
+        new Select(wd.findElement(By.name("group")))
+                .selectByVisibleText(group.getName());
+        selectedContactById(contact.getId());
+        click(By.name("remove"));
+    }
+    public void addToGroup(ContactData contact, GroupDate group) {
+        selectedContactById(contact.getId());
+        wd.findElement(By.name("to_group")).click();
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
+        wd.findElement(By.name("add")).click();
+    }
+    public ContactData findFreeContact(Groups groups, Contacts contacts) {
+        ContactData foundContact = null;
+        // обходим контакты и пытаемся найти контакт который не во всех группах
+        for (ContactData contact : contacts) {
+            foundContact = contact;
+            if (contact.getGroups().size() != groups.size()) {
+                break;
+            }
+        }
+        return foundContact;
+    }
+    //выбор группы, из которой хотим удалить контакт
+    public void selectParentGroupById(int id) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.format("%s", id));
+    }
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector(String.format("input[value='%s']", id))).click();
+    }
+    public void submitContactRemovingFromGroup() {
+        click(By.name("remove"));
+    }
+    //переход на страницу конкретной группы
+    public void goToSelectedGroupPage(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='./?group=%s']", id))).click();
+    }
+
+    public void removeFromGroup(ContactData contact, GroupDate group) {
+        selectParentGroupById(group.getId());
+        selectContactById(contact.getId());
+        submitContactRemovingFromGroup();
+        contactCache = null;
+        goToSelectedGroupPage(group.getId());
     }
 }
 
